@@ -1,0 +1,26 @@
+{
+  "allowedTools": [
+    "Bash(npm install:*)",
+    "Bash(git:*)",
+    "Bash(echo:*)",
+    "Bash(node:*)",
+    "Read",
+    "Write",
+    "Edit",
+    "Glob",
+    "Grep"
+  ],
+  "ignorePatterns": [
+    "node_modules/**",
+    ".git/**",
+    "dist/**",
+    "build/**",
+    ".env*",
+    "*.log"
+  ],
+  "autoCompact": true,
+  "todoFeatureEnabled": true,
+  "thinking": {
+    "enabled": true
+  }
+}

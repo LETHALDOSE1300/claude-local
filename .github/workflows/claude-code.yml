@@ -1,0 +1,51 @@
+name: Claude Code Integration
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+  issue_comment:
+    types: [created]
+
+jobs:
+  claude-code:
+    runs-on: ubuntu-latest
+
+    # Only run on PR comments that mention @claude
+    if: |
+      (github.event_name == 'pull_request') ||
+      (github.event_name == 'issue_comment' &&
+       github.event.issue.pull_request &&
+       contains(github.event.comment.body, '@claude'))
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Install Claude Code
+        run: npm install -g @anthropic-ai/claude-code
+
+      - name: Claude Code Action
+        uses: anthropics/claude-code-action@v1
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          model: claude-sonnet-4-5-20250929
+          max_turns: 10
+          # For interactive mode (responds to @claude mentions)
+          # prompt is automatically extracted from comment
+
+          # For automation mode (runs immediately on PR)
+          # Uncomment below to auto-run on every PR:
+          # prompt: |
+          #   Review this PR for:
+          #   - Code quality and best practices
+          #   - Potential bugs
+          #   - Security issues
+          #   - Performance concerns
+          #   Provide detailed feedback.
