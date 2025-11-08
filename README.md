@@ -26,7 +26,17 @@ git clone https://github.com/LETHALDOSE1300/claude-local.git
 cd claude-local
 ```
 
-### 2. Run the setup script
+### 2. Set up your environment variables
+
+```bash
+# Create your local .env file
+cp .env.example .env
+
+# Edit and add your API key
+nano .env  # or use your preferred editor
+```
+
+### 3. Run the setup script
 
 ```bash
 chmod +x setup.sh
@@ -37,9 +47,9 @@ The setup script will:
 - Install all MCP servers
 - Install all plugins
 - Configure Claude Code with optimal settings
-- Set up environment variables
+- Load environment variables from .env
 
-### 3. Start Claude Code
+### 4. Start Claude Code
 
 ```bash
 claude
@@ -125,6 +135,22 @@ claude
 
 ## Environment Variables
 
+### Option 1: Project-Level `.env` File (Recommended)
+
+The repository includes a `.env.example` template:
+
+```bash
+# Create your local .env file
+cp .env.example .env
+
+# Edit and add your API key
+nano .env
+```
+
+Your `.env` file is gitignored and will persist locally. See [docs/env-setup.md](docs/env-setup.md) for details.
+
+### Option 2: System-Level Environment Variables
+
 Add to your `~/.bashrc` or `~/.zshrc`:
 
 ```bash
@@ -197,6 +223,7 @@ echo $ANTHROPIC_API_KEY
 claude-local/
 ├── README.md              # This file
 ├── setup.sh              # Automated setup script
+├── .env.example          # Environment variables template
 ├── config/
 │   ├── settings.template.json   # Settings template
 │   └── mcp.template.json        # MCP config template
@@ -204,6 +231,7 @@ claude-local/
 │   ├── rube-examples.md        # Rube usage examples
 │   └── workflow-examples.md    # Development workflow examples
 └── docs/
+    ├── env-setup.md            # Environment setup guide
     ├── mcp-servers.md          # MCP server documentation
     ├── plugins.md              # Plugin documentation
     └── advanced-config.md      # Advanced configuration guide

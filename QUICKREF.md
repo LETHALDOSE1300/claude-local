@@ -128,19 +128,32 @@ claude mcp add-from-claude-desktop          # Import from Claude Desktop
 
 ## Environment Variables
 
-### Essential
+### Setup (Recommended)
 ```bash
+# Use project-level .env file (gitignored, persistent)
+cp .env.example .env
+nano .env  # Add your API key
+
+# Or add to ~/.bashrc / ~/.zshrc for system-wide access
 export ANTHROPIC_API_KEY="your-key"
 export ANTHROPIC_MODEL="claude-sonnet-4-5-20250929"
 ```
 
-### Optional
+### Essential Variables
 ```bash
-export BASH_DEFAULT_TIMEOUT_MS=120000        # Bash timeout (2 min)
-export MCP_TIMEOUT=30000                     # MCP server timeout (30s)
-export ANTHROPIC_LOG=debug                   # Enable debug logging
-export CLAUDE_CODE_AUTO_CONNECT_IDE=true     # Auto-connect to IDE
+ANTHROPIC_API_KEY=your-key
+ANTHROPIC_MODEL=claude-sonnet-4-5-20250929
 ```
+
+### Optional Variables
+```bash
+BASH_DEFAULT_TIMEOUT_MS=120000        # Bash timeout (2 min)
+MCP_TIMEOUT=30000                     # MCP server timeout (30s)
+ANTHROPIC_LOG=debug                   # Enable debug logging
+CLAUDE_CODE_AUTO_CONNECT_IDE=true     # Auto-connect to IDE
+```
+
+See [docs/env-setup.md](docs/env-setup.md) for detailed setup guide.
 
 ## Keyboard Shortcuts
 
